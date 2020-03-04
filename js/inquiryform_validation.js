@@ -415,7 +415,7 @@ function onInputValidate(inputConfig)
 				errorEl.innerHTML = inputConfig.validation[i].errorMessage;
 			}
 			else {
-				errorEl.innerHTML = inputConfig.validation[i].errorMessage = " ";
+				errorEl.innerHTML = " ";
 			 }
 		}
 		if (inputConfig.validation[i].type == 'MatchPassword') {
@@ -432,7 +432,7 @@ function onInputValidate(inputConfig)
 			{
 				errorEl.innerHTML = inputConfig.validation[i].errorMessage;
 			}
-			else { errorEl.innerHTML = inputConfig.validation[i].errorMessage = " ";}
+			else { errorEl.innerHTML =  " ";}
 		}
 
 		// else 
