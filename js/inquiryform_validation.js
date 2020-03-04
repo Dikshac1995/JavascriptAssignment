@@ -184,6 +184,7 @@
 // //    }
 // // }
 
+
 var allInputs = 
 [
 	
@@ -255,8 +256,6 @@ var allInputs =
 	   
 	},
 
-	
-	
 	{
 		'id':'password',
 		'label':'password1',
@@ -286,7 +285,7 @@ var allInputs =
 		  },
 		  {
 			  type :'MatchPassword',
-			  value: 'password',
+			  matchId: 'password',
 		      errorMessage :'password does not match '
 		  
 		  }
@@ -312,9 +311,7 @@ var allInputs =
 			    errorMessage : 'about You is required'
 			}
 		]
-	},
-	
-	
+	},	
 ]
 	
 
@@ -325,9 +322,7 @@ function formValidate(e)
 	// e.preventDefault(); 
    console.log("ht",e)
    if(e.type =='submit'){
-
-	for(var i = 0; i < allInputs.length; i++)
-	
+      for(var i = 0; i < allInputs.length; i++)
 		{
 		onInputValidate(allInputs[i]);
         }
@@ -335,12 +330,10 @@ function formValidate(e)
    }
   else if(e.type =='blur')
   { 
-	  console.log(e.type,"hihhnmn")
-	
-	  switch(e.target.id){
+	console.log(e.type,"hihhnmn")
+	    switch(e.target.id){
 		  case "firstName" :
 			  {
-				 
 				onInputValidate(allInputs[0]);
 				break
 			  }
@@ -358,37 +351,31 @@ function formValidate(e)
 			  }
 			  case "officeNO" :
 			  {
-				 
 				onInputValidate(allInputs[3]);
 				break
 			  }
 			  case "emailId" :
 			  {
-				 
 				onInputValidate(allInputs[4]);
 				break
 			  }
 			  case "password" :
 			  {
-				 
 				onInputValidate(allInputs[5]);
 				break
 			  }
 			  case "confirmPassword" :
 			  {
-				 
 				onInputValidate(allInputs[6]);
 				break
 			  }
 			  case "checkbox_sample18" :
 			  {
-				 
 				onInputValidate(allInputs[7]);
 				break
 			  }
 			  case "aboutYou" :
 			  {
-				 
 				onInputValidate(allInputs[8]);
 				break
 			  }
@@ -405,17 +392,12 @@ function formValidate(e)
 function onInputValidate(inputConfig)
 {
 	console.log("wecokm")
-
 	console.log('inputId', inputConfig);
-	
-
 	var el = document.getElementById(inputConfig.id);
 	// var el2 = document.getElementById(inputConfig.class);
 	var elParent = el.closest(".form-control");
 	var errorEl = elParent.querySelector('.error');
 	
-
-
 	for(var i = 0; i < inputConfig.validation.length; i++){
 		if(inputConfig.validation[i].type == 'required'){
 			if(el.value == '')
@@ -423,25 +405,34 @@ function onInputValidate(inputConfig)
 				errorEl.innerHTML = inputConfig.validation[i].errorMessage;
 				break;
 			}
-			
+			else {
+				errorEl.innerHTML = inputConfig.validation[i].errorMessage=" ";
+			}
 		}
 		 if(inputConfig.validation[i].type == 'pattern'){
 			if(!inputConfig.validation[i].value.test(el.value))
 			{
 				errorEl.innerHTML = inputConfig.validation[i].errorMessage;
 			}
+			else {
+				errorEl.innerHTML = inputConfig.validation[i].errorMessage = " ";
+			 }
 		}
-		 if(inputConfig.validation[i].type == 'MatchPassword'){
-			if(!inputConfig.validation[i].value.match(el.value))
+		if (inputConfig.validation[i].type == 'MatchPassword') {
+			//var pass = document.getElementById('password').value;
+			// if(!inputConfig.validation[i].value.match(e.value))
+			if (document.getElementById(inputConfig.validation[i].matchId).value != el.value) 
 			{
 				errorEl.innerHTML = inputConfig.validation[i].errorMessage;
 			}
+			else {errorEl.innerHTML = " ";}
 		}
 		if(inputConfig.validation[i].type == 'checkbox'){
-			if(!inputConfig.validation[i].checked== true)
+			if(!inputConfig.validation[i].checked == true)
 			{
 				errorEl.innerHTML = inputConfig.validation[i].errorMessage;
 			}
+			else { errorEl.innerHTML = inputConfig.validation[i].errorMessage = " ";}
 		}
 
 		// else 
